@@ -1,0 +1,17 @@
+numpy<2.0.0
+black
+isort
+mypy
+pydocstyle
+pylint
+pytest
+setuptools
+tqdm
+wheel
+scipy
+opencv-python
+einops
+matplotlib
+timm
+tensorboard
+wandb
