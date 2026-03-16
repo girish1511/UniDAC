@@ -1,0 +1,2 @@
+splits//argoverse2/argoverse2_train.txt filter=lfs diff=lfs merge=lfs -text
+splits/argoverse2/argoverse2_train.txt filter=lfs diff=lfs merge=lfs -text
