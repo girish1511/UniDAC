@@ -1,0 +1,58 @@
+{
+    "training": {
+        "loss": {
+            "name": "SILog",
+            "weight": 10.0
+        }
+    },
+    "data": {
+        "crop": "",
+        "val_dataset": "GibsonV2Dataset",
+        "data_root": "gibson_v2",
+        "erp": true,
+        "tgt_f": 0,
+        "undistort_f": 0,
+        "fwd_sz": [512, 1024],
+        "cano_sz": [1400, 2800],
+        "train_crop": [512, 704]
+    },
+    "model": {
+        "num_heads": 1,
+        "attn_dec": false,
+        "activation": "gelu",
+        "expansion": 4,
+        "output_dim": 1,
+        "isd": {
+            "latent_dim": 128,
+            "num_resolutions": 3,
+            "depths": 2
+        },
+        "pixel_encoder": {
+            "img_size": [
+                512,
+                1024
+            ],
+            "name": "dinov3_vitl16",
+            "lr_dedicated": 5e-05,
+            "pretrained": "",
+            "output_idx": [6, 12, 18, 24],
+            "use_norm": true,
+            "weights":"/user/ganesang/cvlshare/cvl-ganesang/DINOv3/weights/dinov3_vitl16_pretrain_lvd1689m-8aa4cbdd.pth"
+        },
+        "pixel_decoder": {
+            "in_channels": [1024,1024,1024,1024],
+            "channels": 256,
+            "post_process_channels": [128, 256, 512, 1024],
+            "readout_type": "project",
+            "expand_channels": false,
+            "n_output_channels": 1,
+            "use_batchnorm": true
+        },
+        "afp": {
+            "context_low_resolutions_skip": 1,
+            "depths": 2,
+            "latent_dim": 128,
+            "num_latents": 32
+        }
+    }
+}

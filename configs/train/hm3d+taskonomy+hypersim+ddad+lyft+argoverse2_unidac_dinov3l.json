@@ -1,0 +1,95 @@
+{
+    "generic": {
+        "seed": 13
+    },
+    "training": {
+        "n_iters": 120000,
+        "batch_size": 128,
+        "validation_interval": 500,
+        "nsteps_accumulation_gradient": 1,
+        "lr": 1e-4,
+        "lr_final": 1e-5,
+        "lr_warmup": 0.1,
+        "cycle_beta": false,
+
+        "wd": 0.1,
+        "wd_final": 0.1,
+        "warmup_iters": 20000,
+
+        "drop_path": 0.0,
+        "ema": true,
+        "f16": false,
+        "clipping": 1.0,
+
+        "loss": {
+            "name": "SILog",
+            "weight": 10.0
+        }
+    },
+    "data": {
+        "crop": "",
+        "train_dataset": ["HM3DERPOnlineDataset", "TaskonomyERPOnlineDataset", "HypersimERPOnlineDataset", "DDADERPOnlineDataset", "LYFTERPOnlineDataset","Argoverse2ERPOnlineDataset"],
+        "train_data_root": ["hm3d", "taskonomy", "hypersim", "ddad", "lyft","argoverse2"],
+        "val_dataset": "DDADERPOnlineDataset",
+        "val_data_root": "ddad",
+        "crop_size": [512, 704],
+        "erp_height": 1400,
+        "theta_aug_deg": 0,
+        "phi_aug_deg": 15,
+        "roll_aug_deg": 10,
+        "fov_align": true,
+        "multi_reso_ratios": [1.0],
+        "augmentations": {
+            "horizontal_flip": 0.5,
+            "random_rotation": 2.5,
+            "random_scale": 0.2,
+            "random_translation": 0.05,
+            "random_brightness": 0.1,
+            "random_contrast": 0.1,
+            "random_saturation": 0.1,
+            "random_gamma": 0.2,
+            "random_hue": 0.1,
+            "random_sharpness": 0.1,
+            "random_posterize": 4,
+            "random_solarize": 0.2,
+            "rotation_p": 0,
+            "scale_p": 1,
+            "translation_p": 0,
+            "brightness_p": 1,
+            "contrast_p": 1,
+            "saturation_p": 1,
+            "gamma_p": 1,
+            "hue_p": 1,
+            "sharpness_p": 0,
+            "posterize_p": 0,
+            "solarize_p": 0,
+            "equalize_p": 0,
+            "autocontrast_p": 0
+        }
+    },
+    "model": {
+        "output_dim": 1,
+        "pixel_encoder": {
+            "img_size": [
+                512,
+                704
+            ],
+            "name": "dinov3_vitl16",
+            "pretrained": "",
+            "lr_dedicated": 5e-05,
+            "output_idx": [6, 12, 18, 24],
+            "use_norm": true,
+            "weights":"/user/ganesang/cvlshare/cvl-ganesang/DINOv3/weights/dinov3_vitl16_pretrain_lvd1689m-8aa4cbdd.pth",
+            "rope_lat_weight": true
+        },
+        "pixel_decoder": {
+            "in_channels": [1024,1024,1024,1024],
+            "channels": 256,
+            "post_process_channels": [128, 256, 512, 1024],
+            "readout_type": "project",
+            "expand_channels": false,
+            "n_output_channels": 1,
+            "use_batchnorm": true
+        }
+    }
+}
