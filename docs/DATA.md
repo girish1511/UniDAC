@@ -57,8 +57,6 @@ depth_any_camera
 
 Ensure that the datasets are soft-linked to folders under the `datasets` directory and follow the data structure mentioned [here](https://github.com/yuliangguo/depth_any_camera/blob/main/docs/DATA.md), so that our config files and scripts can be directly utilized.
 
-We provide below the data preparation steps and the file structure for the remaining datasets, i.e., **Argoverse2**, **A2D2**, **iBims** and **NuScenes**.
-
 ## Testing Datasets
 
 
