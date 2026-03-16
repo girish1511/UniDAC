@@ -113,9 +113,6 @@ pip install torch==2.7.0 torchvision==0.22.0 torchaudio==2.7.0 --index-url https
 
 pip install -r requirements.txt
 export PYTHONPATH="$PWD:$PYTHONPATH"
-cd unidac/models/ops/
-pip install -e .
-cd  ../../../
 ```
 
 ## Data Preparation
