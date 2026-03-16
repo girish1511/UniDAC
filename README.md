@@ -117,6 +117,10 @@ export PYTHONPATH="$PWD:$PYTHONPATH"
 
 ## Data Preparation
 
+The training set consist of 4 outdoor datasets and 3 indoor datasets. The testing set consists of two 360 datasets, two fisheye datasets and 4 perspective datasets.
+
+Please refer to [DATA.md](docs/DATA.md) for detailed datasets preparation.
+
 <!-- Our current training set is very slim compared to prior fundation models. Currently, DAC is trained on a combination set of 3 labeled datasets (670k images) for indoor model and a combination of 2 datasets (130k) for outdoor model. Two 360 datasets and two fisheye datasets are used for zero-shot testing.
 
 ![data](docs/table_data_coverage.png)
