@@ -40,8 +40,8 @@ class LYFTERPOnlineDataset(BaseDataset):
         self.depth_scale = depth_scale
         self.crop = crop
         self.is_dense = is_dense
-        self.height = crop_size[0] #450 #900 #256
-        self.width = crop_size[1] #600 #1180
+        self.height = crop_size[0]
+        self.width = crop_size[1]
         self.erp_height = erp_height
         self.theta_aug_deg = theta_aug_deg
         self.phi_aug_deg = phi_aug_deg
@@ -77,11 +77,6 @@ class LYFTERPOnlineDataset(BaseDataset):
         print(
             f"Loaded {len(self.dataset)} images. Totally {self.invalid_depth_num} invalid pairs are filtered"
         )
-        # print(f"Lyft FOV range: {self.fov_min}, {self.fov_max}") # 0.3540305197238922, 1.0564799308776855
-        # self.fov_avg[0] /= len(self.dataset)
-        # self.fov_avg[1] /= len(self.dataset)
-        # print(f"Average FOV: {self.fov_avg}") #[tensor(1.2727), tensor(1.1033)]
-        # exit()
 
     def __getitem__(self, idx):
         """Get training/test data after pipeline.
@@ -156,7 +151,6 @@ class LYFTERPOnlineDataset(BaseDataset):
         
         # # visualize image, gts[gt], gts[erp_mask]
         if self.visual_debug:
-            # erp_rgb = torch.tensor(erp_rgb).permute(2, 0, 1)
             import matplotlib.pyplot as plt
             plt.figure()
             plt.subplot(2, 2, 1)

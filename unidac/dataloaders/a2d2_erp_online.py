@@ -42,13 +42,8 @@ class A2D2ERPOnlineDataset(BaseDataset):
         self.depth_scale = depth_scale
         self.crop = crop
         self.is_dense = is_dense
-        self.height = crop_size[0] #500 #450 #900 #256
-        self.width = crop_size[1] #650 #600 #1180 
-        # self.height_start, self.width_start = 180, 8
-        # self.height_end, self.width_end = (
-        #     self.height_start + self.height,
-        #     self.width_start + self.width,
-        # )
+        self.height = crop_size[0]
+        self.width = crop_size[1]
         self.erp_height = erp_height
         self.theta_aug_deg = theta_aug_deg
         self.phi_aug_deg = phi_aug_deg
@@ -58,7 +53,7 @@ class A2D2ERPOnlineDataset(BaseDataset):
         self.fov_avg=[0,0]
         self.fov_min = np.inf
         self.fov_max = -np.inf
-        # self.rescale = rescale
+
         # load annotations
         self.load_dataset()
         for k, v in augmentations_db.items():
@@ -68,28 +63,18 @@ class A2D2ERPOnlineDataset(BaseDataset):
         self.invalid_depth_num = 0
         print(f"Loading dataset from {self.base_path}")
         with open(os.path.join('splits/a2d2', self.split_file)) as f:
-            data_dict = json.load(f)
-            for data in data_dict['files']:
+            for line in f:
+                data = line.strip().split(" ")
                 img_info = dict()
-                img_path = data['rgb']
-                depth_path = data['depth']
+                img_path = data[0]
+                depth_path = data[1]
+                cam_in = list(map(float, data[2:]))
                 img_info["annotation_filename_depth"] = os.path.join(
                         self.base_path, depth_path
                     )
                 img_info["image_filename"] = os.path.join(self.base_path, img_path)
-                img_info["cam_intrinsics"] = data['cam_in'] 
+                img_info["cam_intrinsics"] = cam_in
                 self.dataset.append(img_info)
-            # for line in f:
-            #     img_info = dict()
-            #     img_name = line.strip().split(" ")[0]
-
-            #     if not self.benchmark:  # benchmark test
-            #         depth_map = line.strip().split(" ")[1]
-            #         img_info["annotation_filename_depth"] = os.path.join(
-            #             self.base_path, depth_map
-            #         )
-            #     img_info["image_filename"] = os.path.join(self.base_path, img_name)
-            #     self.dataset.append(img_info)
         print(
             f"Loaded {len(self.dataset)} images. Totally {self.invalid_depth_num} invalid pairs are filtered"
         )

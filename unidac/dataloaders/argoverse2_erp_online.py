@@ -7,15 +7,15 @@ import torch
 from PIL import Image
 
 from .dataset import BaseDataset
-from unidac.utils.erp_geometry import cam_to_erp_patch_fast
+from dac.utils.erp_geometry import cam_to_erp_patch_fast
 import torch
 
-class DDADERPOnlineDataset(BaseDataset):
+
+class Argoverse2ERPOnlineDataset(BaseDataset):
     min_depth = 0.01
-    max_depth = 200
-    test_split = "ddad_val.txt"
-    train_split = "ddad_train.txt"
-    intrisics_file = "ddad_intrinsics.json"
+    max_depth = 100
+    test_split = "argoverse2_val.txt"
+    train_split = "argoverse2_train.txt"
 
     def __init__(
         self,
@@ -42,8 +42,8 @@ class DDADERPOnlineDataset(BaseDataset):
         self.depth_scale = depth_scale
         self.crop = crop
         self.is_dense = is_dense
-        self.height = crop_size[0]
-        self.width = crop_size[1]
+        self.height = crop_size[0] 
+        self.width = crop_size[1] 
         self.erp_height = erp_height
         self.theta_aug_deg = theta_aug_deg
         self.phi_aug_deg = phi_aug_deg
@@ -62,71 +62,55 @@ class DDADERPOnlineDataset(BaseDataset):
     def load_dataset(self):
         self.invalid_depth_num = 0
         print(f"Loading dataset from {self.base_path}")
-        with open(os.path.join('splits/ddad', self.intrisics_file)) as f:
-            self.intrinsics = json.load(f)
-
-        with open(os.path.join('splits/ddad', self.split_file)) as f:
+        with open(os.path.join('splits/argoverse2', self.split_file)) as f:
             for line in f:
+                data = line.strip().split(" ")
                 img_info = dict()
-                img_name = line.strip().split(" ")[0]
-
-                if not self.benchmark:  # benchmark test
-                    depth_map = line.strip().split(" ")[1]
-                    img_info["annotation_filename_depth"] = os.path.join(
-                        self.base_path, depth_map
+                img_path = data[0]
+                depth_path = data[1]
+                cam_in = list(map(float, data[2:]))
+                img_info["annotation_filename_depth"] = os.path.join(
+                        self.base_path, depth_path
                     )
-                img_info["image_filename"] = os.path.join(self.base_path, img_name)
+                img_info["image_filename"] = os.path.join(self.base_path, img_path)
+                img_info["cam_intrinsics"] = cam_in
                 self.dataset.append(img_info)
         print(
             f"Loaded {len(self.dataset)} images. Totally {self.invalid_depth_num} invalid pairs are filtered"
         )
-
+    
     def __getitem__(self, idx):
-        """Get training/test data after pipeline.
-        Args:
-            idx (int): Index of data.
-        Returns:
-            dict: Training/test data (with annotation if `test_mode` is set
-                False).
-        """
-        image = np.asarray(Image.open(self.dataset[idx]["image_filename"]))
-        if not self.benchmark:
-            depth = (
-                np.asarray(Image.open(self.dataset[idx]["annotation_filename_depth"])).astype(
-                    np.float32
-                )
-                / self.depth_scale
+        image = np.asarray(Image.open(self.dataset[idx]["image_filename"]))[...,:3]
+        depth = (
+            np.asarray(Image.open(self.dataset[idx]["annotation_filename_depth"])).astype(
+                np.float32
             )
-
-        # prepare the erp_range for prepare PE later in network (net will adjust reso for diff layers)
-        key = self.dataset[idx]["image_filename"][len(self.base_path)+1:]
-        cam_intrinsics = np.array(self.intrinsics[key])
+            / self.depth_scale
+        )
+        cam_intrinsics = self.dataset[idx]["cam_intrinsics"]
         cam_params = {
-            "dataset": "ddad",
-            "wFOV": np.arctan(1936 / 2 / cam_intrinsics[0, 0]) * 2,
-            "hFOV": np.arctan(1216 / 2 / cam_intrinsics[1, 1]) * 2,
-            "width": 1936,
-            "height": 1216, 
-            "fx": cam_intrinsics[0, 0],
-            "fy": cam_intrinsics[1, 1],
+            "dataset": "argoverse2",
+            "wFOV": np.arctan(2048 / 2 / cam_intrinsics[0]) * 2,
+            "hFOV": np.arctan(1550 / 2 / cam_intrinsics[1]) * 2,
+            "width": 2048,
+            "height": 1550, 
+            "fx": cam_intrinsics[0],
+            "fy": cam_intrinsics[1],
         }
 
-        # convert depth from zbuffer to euclidean distance
         if depth is not None:
             x, y = np.meshgrid(np.arange(depth.shape[1]), np.arange(depth.shape[0]))
-            depth = depth * np.sqrt((x - cam_intrinsics[0, 2])**2 + (y - cam_intrinsics[1, 2])**2 + cam_intrinsics[0, 0]**2) / cam_intrinsics[0, 0]
+            depth = depth * np.sqrt((x - cam_intrinsics[2])**2 + (y - cam_intrinsics[3])**2 + cam_intrinsics[0]**2) / cam_intrinsics[0]
             depth = depth.astype(np.float32)
 
-        # prepare the erp patch, and associated labels
         theta = np.deg2rad(np.random.uniform(-self.theta_aug_deg, self.theta_aug_deg)).astype(np.float32)
         phi = np.deg2rad(np.random.uniform(-self.phi_aug_deg, self.phi_aug_deg)).astype(np.float32)
-        # phi = 0
-        # theta = 0
+
         roll = np.deg2rad(np.random.uniform(-self.roll_aug_deg, self.roll_aug_deg)).astype(np.float32)
         image = image.astype(np.float32) / 255.0
         depth = np.expand_dims(depth, axis=2)
         mask_valid_depth = (depth > self.min_depth) & (depth < self.max_depth)
-        
+
         if not self.test_mode and self.fov_align:
             # scale_fac = cam_params["hFOV"] / ((self.height / self.erp_height)*np.pi)
             scale_fac =  cam_params["hFOV"] / ((self.height / self.erp_height) * np.pi) * 1.2 # 1.2 is for including more black border
@@ -150,34 +134,10 @@ class DDADERPOnlineDataset(BaseDataset):
                 [0.000000e00, 0.000000e00, 1.000000e00],
             ]
         )
-        
+
         # Image augmentation. Should only include those compatible with ERP
         image, gts, info = self.transform(image=(erp_rgb * 255.).astype(np.uint8), gts={"depth": erp_depth, "attn_mask": erp_mask, "lat_grid": latitude}, info=info)
 
-        
-        if self.visual_debug:
-            # # visualize image, gts[gt], gts[erp_mask]
-            erp_rgb = (erp_rgb * 255).astype(np.uint8)
-            erp_rgb = torch.from_numpy(erp_rgb).permute(2, 0, 1)
-            import matplotlib.pyplot as plt
-            plt.figure()
-            plt.subplot(2, 2, 1)
-            plt.imshow((image.permute(1, 2, 0) - image.min()) / (image.max() - image.min()))
-            plt.axis('off')
-            plt.title("Image")
-            plt.subplot(2, 2, 2)
-            plt.imshow(gts["gt"].squeeze())
-            plt.axis('off')
-            plt.title("Ground Truth")
-            plt.subplot(2, 2, 3)
-            plt.imshow(gts["mask"].squeeze().bool())
-            plt.axis('off')
-            plt.title("valid Mask")
-            plt.subplot(2, 2, 4)
-            plt.imshow(gts["attn_mask"].squeeze().bool())
-            plt.axis('off')
-            plt.title("Attn Mask")
-            plt.show()
 
         if self.test_mode:
             return {"image": image, "gt": gts["gt"], "mask": gts["mask"], "attn_mask": gts["attn_mask"], "lat_grid": gts["lat_grid"],
@@ -190,7 +150,7 @@ class DDADERPOnlineDataset(BaseDataset):
                     "lat_range": lat_range, "long_range": long_range, 
                     # "intrinsics": info["camera_intrinsics"], "scale": info.get("scale", 1.0), "phi": phi, "theta": theta
                     }
-        
+
     def preprocess_crop(self, image, gts=None, info=None):
         height_start, width_start = int(image.shape[0] - self.height), int(
             (image.shape[1] - self.width) / 2
