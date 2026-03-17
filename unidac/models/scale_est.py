@@ -1,8 +1,8 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from dac.models.backbones.metadinov3 import SelfAttentionBlock, Mlp, SwiGLUFFN
-from dac.models.backbones.dinov3 import ffn_layer_dict, norm_layer_dict
+from unidac.models.backbones.metadinov3 import SelfAttentionBlock, Mlp, SwiGLUFFN
+from unidac.models.backbones.dinov3 import ffn_layer_dict, norm_layer_dict
 
 def _assert_finite(name, x):
     if not torch.isfinite(x).all():

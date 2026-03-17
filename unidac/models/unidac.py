@@ -6,10 +6,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from dac.models.dpt_decoder import DPTHead
-# from dac.models.scale_est import ScaleMapEstimation
-from dac.models.scale_est_new import ScaleMapEstimation
-from dac.models.scale_est_new_dinov2 import ScaleMapEstimation as ScaleMapEstimationDinov2
+from unidac.models.dpt_decoder import DPTHead
+from unidac.models.scale_est import ScaleMapEstimation
 
 class UniDACERP(nn.Module):
     def __init__(
