@@ -57,11 +57,11 @@ def main(config: Dict[str, Any], args: argparse.Namespace):
         drop_last=False,
     )
 
-    is_normals = config["model"]["output_dim"] > 1
-    if is_normals:
-        metrics_tracker = RunningMetric(list(DICT_METRICS_NORMALS.keys()))
-    else:
-        metrics_tracker = RunningMetric(list(DICT_METRICS_DEPTH.keys()))
+    # is_normals = config["model"]["output_dim"] > 1
+    # if is_normals:
+    #     metrics_tracker = RunningMetric(list(DICT_METRICS_NORMALS.keys()))
+    # else:
+    metrics_tracker = RunningMetric(list(DICT_METRICS_DEPTH.keys()))
 
     print("Start validation...")
     with torch.no_grad():
