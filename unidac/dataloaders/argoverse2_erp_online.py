@@ -7,7 +7,7 @@ import torch
 from PIL import Image
 
 from .dataset import BaseDataset
-from dac.utils.erp_geometry import cam_to_erp_patch_fast
+from unidac.utils.erp_geometry import cam_to_erp_patch_fast
 import torch
 
 
