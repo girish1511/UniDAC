@@ -9,10 +9,10 @@ import torch.utils.data.distributed
 from torch import nn
 from torch.utils.data import DataLoader
 
-from dac.utils.metrics import RunningMetric
-from dac.utils.misc import is_main_process
-from dac.utils.visualization import visualize_results
-from dac.utils.erp_geometry import erp_patch_to_cam_fast
+from unidac.utils.metrics import RunningMetric
+from unidac.utils.misc import is_main_process
+from unidac.utils.visualization import visualize_results
+from unidac.utils.erp_geometry import erp_patch_to_cam_fast
 
 import cv2
 from PIL import Image

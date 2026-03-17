@@ -8,8 +8,8 @@ import matplotlib.cm as cm
 import matplotlib.colors as mcolors
 import os, cv2
 import torch
-from dac.utils.erp_geometry import erp_patch_to_cam_fast
-from dac.utils.unproj_pcd import reconstruct_pcd, reconstruct_pcd_fisheye, reconstruct_pcd_erp
+from unidac.utils.erp_geometry import erp_patch_to_cam_fast
+from unidac.utils.unproj_pcd import reconstruct_pcd, reconstruct_pcd_fisheye, reconstruct_pcd_erp
 
 
 def colorize(
