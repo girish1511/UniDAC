@@ -188,12 +188,6 @@ class KITTI360ERPDataset(BaseDataset):
         crop_width = int(self.cano_sz[0])
         crop_height = int(crop_width * self.fwd_sz[0] / self.fwd_sz[1])
 
-        frame_num = '@'.join(self.dataset[idx]["annotation_filename_depth"].split('/')[-3:])[:-4]
-        pred_cam_params_path = os.path.join("/user/ganesang/cvlshare/cvl-ganesang/AnyCalib/pred/kitti360", f"{frame_num}.json")
-        with open(pred_cam_params_path, 'r') as f:
-            cam_params = json.load(f)
-            cam_params.update({'camera_model': 'MEI'})
-
         # convert to ERP
         image, depth, _, erp_mask, latitude, longitude = cam_to_erp_patch_fast(
             image, depth, (mask_valid_depth * 1.0).astype(np.float32), theta, phi,

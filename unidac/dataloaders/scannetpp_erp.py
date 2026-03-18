@@ -170,11 +170,6 @@ class ScanNetPPERPDataset(BaseDataset):
         mask_valid_depth = depth > self.min_depth
 
         cam_params = self.scene_dict[scene_id]
-        # frame_num = self.dataset[idx]["annotation_filename_depth"].split('/')[-1][:-4]
-        # pred_cam_params_path = os.path.join("/user/ganesang/cvlshare/cvl-ganesang/AnyCalib/pred/scannetpp", f"{frame_num}.json")
-        # with open(pred_cam_params_path, 'r') as f:
-        #     cam_params = json.load(f)
-        #     cam_params.update({'camera_model': 'OPENCV_FISHEYE'})
 
         image, depth, _, erp_mask, latitude, longitude = cam_to_erp_patch_fast(
             image, depth, (mask_valid_depth * 1.0).astype(np.float32), theta, phi,
