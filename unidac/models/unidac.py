@@ -139,7 +139,7 @@ class UniDACERP(nn.Module):
             config_backone["pretrained"] = pixel_encoder_pretrained
         import importlib
 
-        mod = importlib.import_module("dac.models.encoder")
+        mod = importlib.import_module("unidac.models.encoder")
         pixel_encoder_factory = getattr(mod, config["model"]["pixel_encoder"]["name"])
         if 'vit' in config["model"]["pixel_encoder"]["name"]:
             pixel_encoder_config = {
@@ -155,7 +155,7 @@ class UniDACERP(nn.Module):
         
         pixel_decoder = DPTHead(**config["model"]["pixel_decoder"])
 
-        mod = importlib.import_module("dac.optimization.losses")
+        mod = importlib.import_module("unidac.optimization.losses")
         rel_loss = getattr(mod, config["training"]["loss"]["name"]).build(config)
         metric_loss = getattr(mod, config["training"]["loss"]["name"]).build(config)
         try:
