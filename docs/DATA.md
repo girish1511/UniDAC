@@ -65,10 +65,17 @@ Download the official dataset from [here](https://www.asg.ed.tum.de/lmf/ibims1/)
 The dataset is soft-linked in `datasets/ibims` and splits are saved [here](../splits/kitti)
 
 ### **NuScenes**
-Download the official dataset from [here](https://www.nuscenes.org/nuscenes), which includes camera, lidar and calibration data for 1000 scenes.
-Follow the instructions here to generate the depthmaps.
-The dataset is soft-linked to `datasets/nuscenes`, and splits are saved [here](../splits/nuscenes).
+Download the official dataset from [here](https://www.nuscenes.org/nuscenes), which includes camera, lidar and calibration data for 1000 scenes and install the devkit from the [offical NuScenes repository](http://github.com/nutonomy/nuscenes-devkit).
 
+
+Run the following code to generate depthmaps from LiDAR. Download masks from [here](https://github.com/ShngJZ/RePLAy-Release) to remove projective artifacts while generating depthmaps from LiDAR.
+
+```bash
+cd ./UniDAC
+python ./splits/nuscenes/gen_depthmap.py --data_dir ./dataset/nuscenes --split val
+```
+
+The dataset is soft-linked to `datasets/nuscenes`, and splits are saved [here](../splits/nuscenes).
 ---
 
 ## Training Datasets
