@@ -80,7 +80,7 @@ The dataset is soft-linked to `datasets/nuscenes`, and splits are saved [here](.
 
 ## Training Datasets
 
-The three major indoor datasets used for training are provided by [OmniData](https://github.com/EPFL-VILAB/omnidata/tree/main/omnidata_tools/dataset#readme). The package can be installed as follows:
+<!-- The three major indoor datasets used for training are provided by [OmniData](https://github.com/EPFL-VILAB/omnidata/tree/main/omnidata_tools/dataset#readme). The package can be installed as follows:
 
 ```bash
 conda install -c conda-forge aria2
@@ -141,6 +141,6 @@ The dataset is soft-linked to `datasets/ddad`, and splits and intrinsic paramete
 ### **LYFT**
 The dataset can be downloaded from this [webpage](https://www.kaggle.com/c/3d-object-detection-for-autonomous-vehicles/data). After downloading, use the [script](../splits/lyft/generate_json_train.py) to prepare depth maps from the original object detection dataset for training, and another [script](../splits/lyft/generate_json_val.py) for validation. Use the [script](../splits/lyft/generate_splits.py) to generate NYU-style split files.
 
-The dataset is soft-linked to `datasets/lyft`, and splits and intrinsic parameters are saved [here](../splits/lyft).
+The dataset is soft-linked to `datasets/lyft`, and splits and intrinsic parameters are saved [here](../splits/lyft). -->
 
 ---
