@@ -76,7 +76,7 @@ python ./splits/nuscenes/gen_depthmap.py --data_dir ./dataset/nuscenes --split v
 ```
 
 The dataset is soft-linked to `datasets/nuscenes`, and splits are saved [here](../splits/nuscenes).
----
+
 
 ## Training Datasets
 
