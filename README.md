@@ -73,7 +73,7 @@ UniDAC outperforms all prior metric depth estimation methods trained with perspe
 UniDAC outperforms UniK3D, even though the latter has been trained on large FoV images and has a much larger training set, demonstrating the robustness of UniDAC.
 Matterport3D is present in the training set of UniK3D and thus we omit its results.
 
-<table cellspacing="0" cellpadding="6">
+<table cellspacing="0" cellpadding="8">
 <thead>
 <tr>
 <th rowspan="2">Methods</th>
