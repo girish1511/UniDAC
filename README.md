@@ -31,12 +31,12 @@ Notably, DAC can be **trained exclusively on perspective images**, yet it genera
 
 ## News
 
-- 2026-03-21: Demo code for easy setup and usage.
-- 2026-03-13: Release of pre-trained UniDAC models trained on moderately sized datasets.
-- 2026-03-13: Testing and evaluation pipeline for zero-shot metric depth estimation on perspective, fisheye, and 360-degree datasets.
-- 2026-03-13: Complete UniDAC training pipeline using mixed perspective camera data.
-- 2026-03-13: Complete data preparation and curation scripts.
-- 2026-02-20: UniDAC accepted by CVPR 2026!
+- ``2026-03-21``: Demo code for easy setup and usage.
+- ``2026-03-13``: Release of pre-trained UniDAC models trained on moderately sized datasets.
+- ``2026-03-13``: Testing and evaluation pipeline for zero-shot metric depth estimation on perspective, fisheye, and 360-degree datasets.
+- ``2026-03-13``: Complete UniDAC training pipeline using mixed perspective camera data.
+- ``2026-03-13``: Complete data preparation and curation scripts.
+- ``2026-02-20``: UniDAC accepted by CVPR 2026!
 - [TBD] Foundation-level model trained on a large-scale, diverse dataset mixture, encompassing perspective, fisheye, and 360-degree camera data.
 
 ## Visualization
@@ -75,17 +75,84 @@ Additional visual results and comparison with the prior SoTA can be found at <a 
 
 We highlight the **best** and *second best* results in **bold** and *italic* respectively (**better results**: AbsRel $\downarrow$ , $\delta_1 \uparrow$). -->
 
-<!-- ## Pipeline
+## Pipeline
 
-![pipeline](docs/pipeline.png) -->
+![pipeline](docs/pipeline.png)
 
+UniDAC outperforms all prior metric depth estimation methods trained with perspective images on both indoor and outdoor datasets and sets the SoTA in cross-camera generalization given smaller training data size.
 
-# Usage
+<table cellspacing="0" cellpadding="6">
+<thead>
+<tr>
+<th rowspan="2">Methods</th>
+<th rowspan="2">Dataset<br>Size</th>
+<th colspan="2">Matterport3D</th>
+<th colspan="2">ScanNet++</th>
+<th colspan="2">Pano3D-GV2</th>
+<th colspan="2">KITTI-360</th>
+</tr>
+<tr>
+<th>δ₁ ↑</th><th>Abs.Rel ↓</th>
+<th>δ₁ ↑</th><th>Abs.Rel ↓</th>
+<th>δ₁ ↑</th><th>Abs.Rel ↓</th>
+<th>δ₁ ↑</th><th>Abs.Rel ↓</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border-bottom:1px solid black;">UniK3D</td>
+<td style="border-bottom:1px solid black;">8M</td>
+<td style="border-bottom:1px solid black;">-</td>
+<td style="border-bottom:1px solid black;">-</td>
+<td style="border-bottom:1px solid black;">0.651</td>
+<td style="border-bottom:1px solid black;">0.253</td>
+<td style="border-bottom:1px solid black;"><b>0.785</b></td>
+<td style="border-bottom:1px solid black;">0.170</td>
+<td style="border-bottom:1px solid black;">0.817</td>
+<td style="border-bottom:1px solid black;">0.244</td>
+</tr>
+<tr>
+<td>Metric3Dv2</td>
+<td>16M</td>
+<td></td><td></td>
+<td>0.536</td><td>0.223</td>
+<td>0.404</td><td>0.307</td>
+<td>0.716</td><td>0.200</td>
+</tr>
+<tr>
+<td>UniDepth</td>
+<td>3M</td>
+<td>0.258</td><td></td>
+<td>0.364</td><td>0.497</td>
+<td>0.247</td><td>0.789</td>
+<td>0.481</td><td>0.294</td>
+</tr>
+<tr>
+<td>DAC<sub>U</sub></td>
+<td>0.8M</td>
+<td>0.662</td><td>0.215</td>
+<td>0.658</td><td>0.233</td>
+<td>0.684</td><td>0.203</td>
+<td>0.708</td><td>0.186</td>
+</tr>
+<tr>
+<td><b>UniDAC</b></td>
+<td>1.45M</td>
+<td><b>0.745</b></td><td><b>0.175</b></td>
+<td><b>0.918</b></td><td><b>0.097</b></td>
+<td>0.768</td><td><b>0.161</b></td>
+<td><b>0.836</b></td><td><b>0.141</b></td>
+</tr>
+</tbody>
+</table>
+
+UniK3D trains on large FoV images and has much larger training set compared to UniDAC.
+
 ## Installation
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yuliangguo/UniDAC
+git clone https://github.com/girish1511/UniDAC
 cd UniDAC
 ```
 
