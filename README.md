@@ -61,35 +61,27 @@ Notably, DAC can be **trained exclusively on perspective images**, yet it genera
 Additional visual results and comparison with the prior SoTA can be found at <a href='https://yuliangguo.github.io/depth-any-camera/'><img src='https://img.shields.io/badge/Project_Page-Depth Any Camera-green' alt='Project Page'></a> -->
 
 
-## Performance
 
-<!-- Depth Any Camera performs <b>significantly better</b> than the previous SoTA <b>metric</b> depth estimation models Metric3D-v2 and  UniDepth in zero-shot generalization to large FoV camera images given <b>significantly smaller training dataset and model size</b>.
-
-| Method | Training Data Size | Matterport3D (360) || Pano3D-GV2 (360) || ScanNet++ (fisheye) || KITTI360 (fisheye) ||
-|-|-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| | | AbsRel | $\delta_1$ | AbsRel | $\delta_1$ | AbsRel | $\delta_1$ | AbsRel | $\delta_1$ |
-| UniDepth-VitL         | 3M                            | 0.7648 | 0.2576 | 0.7892  | 0.2469 | 0.4971 | 0.3638 | 0.2939 | 0.4810 |  
-| Metric3D-v2-VitL      | 16M                           | 0.2924 | 0.4381 | 0.3070 | 0.4040 | 0.2229 | 0.5360 | 0.1997 | 0.7159 |  
-| **Ours-Resnet101**    | 670K-indoor / 130K-outdoor  | **0.156** | **0.7727** | **0.1387** | **0.8115** | *0.1323*   | *0.8517*   | *0.1559*   | *0.7858* |
-| **Ours-SwinL**        | 670K-indoor / 130K-outdoor  | *0.1789*  | *0.7231*   | *0.1836*   | *0.7287*   | **0.1282** | **0.8544** | **0.1487** | **0.8222** |
-
-We highlight the **best** and *second best* results in **bold** and *italic* respectively (**better results**: AbsRel $\downarrow$ , $\delta_1 \uparrow$). -->
 
 ## Pipeline
 
 ![pipeline](docs/pipeline.png)
 
-UniDAC outperforms all prior metric depth estimation methods trained with perspective images on both indoor and outdoor datasets and sets the SoTA in cross-camera generalization given smaller training data size.
+## Performance
+
+UniDAC outperforms all prior metric depth estimation methods trained with perspective images on both indoor and outdoor datasets and sets the SoTA in zero-shot cross-camera generalization and universal domain robustness.
+UniDAC outperforms UniK3D, even though the latter has been trained on large FoV images and has a much larger training set, demonstrating the robustness of UniDAC.
+Matterport3D is present in the training set of UniK3D and thus we omit its results.
 
 <table cellspacing="0" cellpadding="6">
 <thead>
 <tr>
 <th rowspan="2">Methods</th>
 <th rowspan="2">Dataset<br>Size</th>
-<th colspan="2">Matterport3D</th>
 <th colspan="2">ScanNet++</th>
 <th colspan="2">Pano3D-GV2</th>
 <th colspan="2">KITTI-360</th>
+<th colspan="2">Matterport3D</th>
 </tr>
 <tr>
 <th>δ₁ ↑</th><th>Abs.Rel ↓</th>
@@ -102,51 +94,51 @@ UniDAC outperforms all prior metric depth estimation methods trained with perspe
 <tr>
 <td style="border-bottom:1px solid black;">UniK3D</td>
 <td style="border-bottom:1px solid black;">8M</td>
-<td style="border-bottom:1px solid black;">-</td>
-<td style="border-bottom:1px solid black;">-</td>
 <td style="border-bottom:1px solid black;">0.651</td>
 <td style="border-bottom:1px solid black;">0.253</td>
 <td style="border-bottom:1px solid black;"><b>0.785</b></td>
 <td style="border-bottom:1px solid black;">0.170</td>
 <td style="border-bottom:1px solid black;">0.817</td>
 <td style="border-bottom:1px solid black;">0.244</td>
+<td style="border-bottom:1px solid black;">-</td>
+<td style="border-bottom:1px solid black;">-</td>
 </tr>
 <tr>
 <td>Metric3Dv2</td>
 <td>16M</td>
-<td></td><td></td>
 <td>0.536</td><td>0.223</td>
 <td>0.404</td><td>0.307</td>
 <td>0.716</td><td>0.200</td>
+<td>0.438</td><td>0.292</td>
 </tr>
 <tr>
 <td>UniDepth</td>
 <td>3M</td>
-<td>0.258</td><td></td>
 <td>0.364</td><td>0.497</td>
 <td>0.247</td><td>0.789</td>
 <td>0.481</td><td>0.294</td>
+<td>0.258</td><td>0.765</td>
 </tr>
 <tr>
 <td>DAC<sub>U</sub></td>
 <td>0.8M</td>
-<td>0.662</td><td>0.215</td>
 <td>0.658</td><td>0.233</td>
 <td>0.684</td><td>0.203</td>
 <td>0.708</td><td>0.186</td>
+<td>0.662</td><td>0.215</td>
 </tr>
 <tr>
 <td><b>UniDAC</b></td>
 <td>1.45M</td>
-<td><b>0.745</b></td><td><b>0.175</b></td>
 <td><b>0.918</b></td><td><b>0.097</b></td>
 <td>0.768</td><td><b>0.161</b></td>
 <td><b>0.836</b></td><td><b>0.141</b></td>
+<td><b>0.745</b></td><td><b>0.175</b></td>
 </tr>
 </tbody>
 </table>
 
-UniK3D trains on large FoV images and has much larger training set compared to UniDAC.
+
 
 ## Installation
 ### Clone the Repository
