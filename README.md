@@ -2,32 +2,23 @@
 <div align="center">
 <h1>UniDAC: Universal Metric Depth Estimation for Any Camera</h1>
 
-[**Girish Chandar Ganesan**](https://girish1511.github.io/)<sup>1</sup> . [**Yuliang Guo**](https://yuliangguo.github.io/)<sup>2</sup> · [**Liu Ren**](https://sites.google.com/site/liurenshomepage/)<sup>2</sup> . [**Xiaoming Liu**](https://scholar.google.com/citations?hl=en&user=Bii0w1oAAAAJ)<sup>1</sup>
+[**Girish Chandar Ganesan**](https://girish1511.github.io/)<sup>1</sup> . [**Yuliang Guo**](https://yuliangguo.github.io/)<sup>2</sup> · [**Liu Ren**](https://www.liu-ren.com/)<sup>2</sup> . [**Xiaoming Liu**](https://scholar.google.com/citations?hl=en&user=Bii0w1oAAAAJ)<sup>1</sup>
 
 <sup>1</sup>Michigan State University&emsp;&emsp;&emsp;&emsp;<sup>2</sup>Bosch Research North America
 
 
 <a href=''><img src='https://img.shields.io/badge/arXiv-UniDAC-red' alt='Paper PDF'></a>
-<a href=''><img src='https://img.shields.io/badge/Project_Page-UniDAC-green' alt='Project Page'></a>
-<a href=''><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-yellow'></a>
+<a href='https://girish1511.github.io/UniDAC/'><img src='https://img.shields.io/badge/Project_Page-UniDAC-green' alt='Project Page'></a>
+<a href='https://huggingface.co/girish1511/UniDAC'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-yellow'></a>
 
 [**CVPR 2026**](https://cvpr.thecvf.com/Conferences/2026)
 
 </div>
 
-
-<!-- <p align="center">
-  <img src="docs/teaser.png" alt="teaser" style="width: 70%;">
+<p align="center">
+  <img src="docs/pano_teaser.gif" alt="animated" />
 </p>
 
-**Depth Any Camera (DAC)** is a zero-shot metric depth estimation framework that extends a perspective-trained model to handle any type of camera with varying FoVs effectively. 
-
-Notably, DAC can be **trained exclusively on perspective images**, yet it generalizes seamlessly to **fisheye** and **360** cameras without requiring specialized training data. Key features include:
-
-1. **Zero-shot metric** depth estimation on **fisheye** and **360** images, significantly outperforming prior metric depth SoTA [Metric3D-v2](https://jugghm.github.io/Metric3Dv2/) and [UniDepth](https://github.com/lpiccinelli-eth/UniDepth/tree/main).
-2. Geometry-based training framework **adaptable to any network architecture**, extendable to **other 3D perception tasks**.
-
-**Tired of collecting new data for specific cameras?** DAC maximizes the utility of every existing 3D data for training, regardless of the specific camera types used in new applications. -->
 
 ## News
 
@@ -37,31 +28,7 @@ Notably, DAC can be **trained exclusively on perspective images**, yet it genera
 - ``2026-03-13``: Complete UniDAC training pipeline using mixed perspective camera data.
 - ``2026-03-13``: Complete data preparation and curation scripts.
 - ``2026-02-20``: UniDAC accepted by CVPR 2026!
-- [TBD] Foundation-level model trained on a large-scale, diverse dataset mixture, encompassing perspective, fisheye, and 360-degree camera data.
-
-## Visualization
-
-### ScanNet++ fisheye
-
-<!-- The zero-shot metric depth estimation results of Depth Any Camera (DAC) are visualized on ScanNet++ fisheye videos and compared to Metric3D-v2. The visualizations of A.Rel error against ground truth highlight the superior performance of DAC. 
-
-
-<p align="center">
-  <img src="docs/video_scannet++_1.gif" alt="animated" />
-</p> -->
-
-### Matterport3D single-view reconstruction
-
-<!-- Additionally, we showcase DAC's application on 360-degree images, where a single forward pass of depth estimation enables full 3D scene reconstruction.
-
-<p align="center">
-  <img src="docs/video_matterport3d_1.gif" alt="animated" />
-</p>
-
-Additional visual results and comparison with the prior SoTA can be found at <a href='https://yuliangguo.github.io/depth-any-camera/'><img src='https://img.shields.io/badge/Project_Page-Depth Any Camera-green' alt='Project Page'></a> -->
-
-
-
+<!-- - [TBD] Foundation-level model trained on a large-scale, diverse dataset mixture, encompassing perspective, fisheye, and 360-degree camera data. -->
 
 ## Pipeline
 
@@ -148,21 +115,6 @@ git clone https://github.com/girish1511/UniDAC
 cd UniDAC
 ```
 
-<!-- ### Docker Installation 
-This repository can be run from within Docker, as long as the NVIDIA Container Toolkit is properly configured.
-For Ubuntu Installation steps, refer to [this guide](https://github.com/garylvov/dev_env/tree/main/setup_scripts/nvidia).
-
-```bash
-# Build the container
-docker build -t dac:latest .
-# Enter the container
-docker run --gpus all --network host -v $(pwd):/depth_any_camera --rm -it dac /bin/bash 
-
-# Once within the container, 
-#  source the post-entry-hooks.sh to finish the install.
-source post-entry-hooks.sh
-``` -->
-
 ### Conda Installation
 Alternatively, this repository can be run from within Conda alone.
 ```bash
@@ -186,45 +138,23 @@ Please refer to [DATA.md](docs/DATA.md) for detailed datasets preparation.
 
 Please refer to [DATA.md](docs/DATA.md) for detailed datasets preparation. Make sure the relative paths of datasets have been set correctly before proceeding to the actual testing and training sections. -->
 
+## Testing
 
-## Pre-trained models
+Download the checkpoint from <a href='https://huggingface.co/girish1511/UniDAC'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-yellow'></a> and place in `checkpoints/`.
 
-<!-- We provide two indoor models and two outdoor modeling considering Resnet101 and SwinTransformer-Large (SwinL) as backbones. In addition, we also provide two weaker baseline models for comparison. The download links can be found in the following table or from <a href='https://huggingface.co/yuliangguo/depth-any-camera'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-yellow'></a>. We suggest to save download both the **model configs and model weights** at `checkpoints` in order to run our scripts directly.
-
-| Model Name | Training Datasets | Model Configs | Weights
-|:-|:-:|:-:|:-:|
-| dac-indoor-resnet101 (ours) | indoor mix 670k | [huggingface](https://huggingface.co/yuliangguo/depth-any-camera/blob/main/dac_resnet101_indoor.json)   | [huggingface](https://huggingface.co/yuliangguo/depth-any-camera/blob/main/dac_resnet101_indoor.pt)|
-| dac-indoor-swinL (ours)     | indoor mix 670k | [huggingface](https://huggingface.co/yuliangguo/depth-any-camera/blob/main/dac_swinl_indoor.json) | [huggingface](https://huggingface.co/yuliangguo/depth-any-camera/blob/main/dac_swinl_indoor.pt)|
-| dac-outdoor-resnet101 (ours) | outdoor mix 130k | [huggingface](https://huggingface.co/yuliangguo/depth-any-camera/blob/main/dac_resnet101_outdoor.json) | [huggingface](https://huggingface.co/yuliangguo/depth-any-camera/blob/main/dac_resnet101_outdoor.pt)|
-| dac-outdoor-swinL (ours)    | outdoor mix 130k | [huggingface](https://huggingface.co/yuliangguo/depth-any-camera/blob/main/dac_swinl_outdoor.json) | [huggingface](https://huggingface.co/yuliangguo/depth-any-camera/blob/main/dac_swinl_outdoor.pt)|
-| idisc-metric3d-indoor-resnet101 (weak baseline 1) | indoor mix 670k | [huggingface](https://huggingface.co/yuliangguo/depth-any-camera/blob/main/idisc_resnet101_indoor.json)   | [huggingface](https://huggingface.co/yuliangguo/depth-any-camera/blob/main/idisc_resnet101_indoor.pt)|
-| cnndepth-metric3d-indoor-resnet101 (weak baseline 2) | indoor mix 670k | [huggingface](https://huggingface.co/yuliangguo/depth-any-camera/blob/main/cnndepth_resnet101_indoor.json)   | [huggingface](https://huggingface.co/yuliangguo/depth-any-camera/blob/main/cnndepth_resnet101_indoor.pt)| -->
-
-## Demo
-
-<!-- We have provided a ready-to-run demo scripts in the `demo` folder. `demo/demo_dac_indoor.py` demonstrates how to perform inference on various types of camera data, including ScanNet++ (fisheye), Matterport3D (360), and NYU (perspective), using a single metric depth model trained on perspective images. The code generates point cloud files `*.ply` and visualization results as shown below:
-
-<p align="center">
-  <img src="demo/output/scannetpp_output_remap_subplot.jpg" alt="demo output" style="width: 70%;">
-</p>
-
-`demo/demo_dac_outdoor.py` similarly demonstrates how a single outdoor model handle different types of camera data, including kitti (perspective) and kitti360 (fisheye).
-
-Instead, we also provide demo script for dealing one sample, you may follow the following example command:
+Run the following to evaluate and reproduce the results presented in the paper:
 
 ```bash
-python demo/demo_dac_single.py --config-file checkpoints/dac_swinl_indoor.json --model-file checkpoints/dac_swinl_indoor.pt --sample-file demo/input/scannetpp_sample.json --out-dir demo/output
+bash eval.sh <domain> <dataset>
 ```
 
-Our depth results can be directly downloaded from [ZipNeRF DAC results](https://huggingface.co/yuliangguo/depth-any-camera/blob/main/zipnerf_dac_swinl_indoor_2025_01.zip), and [ScanNet++ DAC results](https://huggingface.co/yuliangguo/depth-any-camera/blob/main/scannetpp_dac_swinl_indoor_2025_01.zip). The results folder can be simply merged with the original dataset for further usage. The predicted depth maps are saved in uint16 images, with visualization as shown below. 
+Different config files for evaluating the reported testing datasets are included in [configs/test](configs/test). Refer to the table below to set the `<domain>` and `<dataset>` arguments, which together select the corresponding configuration file for the dataset you wish to evaluate.
 
-<p align="center">
-  <img src="docs/zipnerf_alameda_vis.gif" alt="animated" style="width: 85%;"/>
-</p>
+| |  ScanNet++  | Matterport3D | Pano3D-GibsonV2 |  KITTI-360 |   KITTI   |    NYU   |  NuScenes  |  iBims-1 |
+| :---------: | :---------: | :----------: | :-------------: | :--------: | :-------: | :------: | :--------: | :------: |
+|  `<domain>` |   `indoor`  |   `indoor`   |     `indoor`    |  `outdoor` | `outdoor` | `indoor` |  `outdoor` | `indoor` |
+| `<dataset>` | `scannetpp` |     `gv2`    |   `scannetpp`   | `kitti360` |  `kitti`  |   `nyu`  | `nuscenes` |  `ibims` |
 
-**Important note**: Our depth maps record the Euclidean distance to the camera center instead of the z-distance to the image plane, which is not appropriate for large-FoV camera models. -->
-
-## Testing
 
 <!-- Given provided pretrained models saved in `checkpoints/`, the following code can be run to test and evaluate on certain dataset, e.g., ScanNet++:
 
@@ -250,42 +180,6 @@ Different config files for testing all the reported datasets are included in [co
 The ResNet101 models and configuration files can be replaced with the corresponding Swin-L versions. Ensure that the `--model-name` parameter matches the type of trained model. For users interested in comparing our DAC framework with the **Metric3D** training framework, we have provided pre-trained weak baselines along with their testing scripts, as detailed in the last two rows of the table. -->
 
 
-## Training
-
-<!-- To train metric depth estimation models under the **DepthAnyCamera (DAC)** framework, you can run the default code for indoor training datasets as follows:
-
-```bash
-python scripts/train_dac.py --config-file configs/train/hm3d+taskonomy+hypersim/hm3d+taskonomy+hypersim_dac_r101.json --base-path datasets --distributed --model-name IDiscERP
-```
-
-If you wish to train with a larger backbone, use the following command:
-
-```bash
-python scripts/train_dac_large.py --config-file configs/train/hm3d+taskonomy+hypersim/hm3d+taskonomy+hypersim_dac_swinl_s2.json --base-path datasets --distributed --model-name IDiscERP
-```
-
-For users interested in comparing our DAC framework with the **Metric3D** training framework, the following command can be used:
-
-```bash
-python scripts/train_persp.py --config-file configs/train/hm3d+taskonomy+hypersim/hm3d+taskonomy+hypersim_r101.json --base-path datasets --distributed --model-name IDisc
-```
-
-The corresponding testing script can be found at [scripts/test_persp.py](scripts/test_persp.py).
-
-Similar commands apply to outdoor model training. There are various options available depending on the dataset or architecture. Interested users can refer to the table below for basic usage or consult the provided [launch.json](.vscode/launch.json) for convenient use or debugging in VSCode. We also provide all the training configurations we’ve used in [configs/train](configs/train).
-
-
-| Training Target | Training script | --config-file | --model-name |
-|:-|:-|:-|:-:|
-| dac-indoor-resnet101          | scripts/train_dac.py           | [relative path](configs/train/hm3d+taskonomy+hypersim/hm3d+taskonomy+hypersim_dac_r101.json)       | IDiscERP or IDisc or CNNDepth  |
-| dac-indoor-swinl              | scripts/train_dac_large.py     | [relative path](configs/train/hm3d+taskonomy+hypersim/hm3d+taskonomy+hypersim_dac_swinl_s2.json)   | IDiscERP or IDisc or CNNDepth  |
-| dac-outdoor-resnet101         | scripts/train_dac.py           | [relative path](configs/train/ddad+lyft/ddad+lyft_dac_r101.json)                                   | IDiscERP or IDisc or CNNDepth  |
-| dac-outdoor-swinl             | scripts/train_dac_large.py     | [relative path](configs/train/ddad+lyft/ddad+lyft_dac_swinl_s2.json)                               | IDiscERP or IDisc or CNNDepth  |
-| metric3d-indoor-resnet101     | scripts/train_persp.py         | [relative path](configs/train/hm3d+taskonomy+hypersim/hm3d+taskonomy+hypersim_r101.json)           | IDisc or CNNDepth  |
-| metric3d-indoor-swinl         | scripts/train_persp.py         | [relative path](configs/train/hm3d+taskonomy+hypersim/hm3d+taskonomy+hypersim_swinl.json)          | IDisc or CNNDepth  |
-| metric3d-outdoor-resnet101    | scripts/train_persp.py         | [relative path](configs/train/ddad+lyft/ddad+lyft_r101.json)                                       | IDisc or CNNDepth  |
-| metric3d-outdoor-swinl        | scripts/train_persp.py         | [relative path](configs/train/ddad+lyft/ddad+lyft_swinl_s2.json)                                   | IDisc or CNNDepth  | -->
-
 
 ## Acknowledgements
 We thank the authors of the following awesome codebases:
@@ -295,10 +189,6 @@ We thank the authors of the following awesome codebases:
 - [Metric3D](https://github.com/YvanYin/Metric3D)
 - [UniDepth](https://github.com/lpiccinelli-eth/UniDepth)
 - [OmniFusion](https://github.com/yuliangguo/OmniFusion)
-
-<!-- For developers interested in multi-view-stereo designs contributing to the cross-camera generalization problem, we refer them to the following insightful works
-- [nvTorchCam](https://github.com/NVlabs/nvTorchCam)
-- [FoVA-Depth](https://research.nvidia.com/labs/lpr/fova-depth/) -->
 
 ## License
 This software is released under MIT license. You can view a license summary [here](LICENSE).

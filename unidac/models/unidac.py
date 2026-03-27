@@ -10,7 +10,7 @@ from unidac.models.dpt_decoder import DPTHead
 from unidac.models.scale_est import ScaleMapEstimation
 from unidac.models.scale_est_dinov2 import ScaleMapEstimation as ScaleMapEstimationDinov2
 
-class UniDACERP(nn.Module):
+class UniDAC(nn.Module):
     def __init__(
         self,
         pixel_encoder:nn.Module,

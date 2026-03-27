@@ -15,7 +15,7 @@ import torch.utils.data.distributed
 from torch.utils.data import DataLoader, SequentialSampler
 
 import unidac.dataloaders as custom_dataset
-from unidac.models.unidac import UniDACERP
+from unidac.models.unidac import UniDAC
 
 from unidac.utils import (DICT_METRICS_DEPTH,
                          RunningMetric, validate)
