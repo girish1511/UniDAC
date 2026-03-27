@@ -2,9 +2,9 @@
 <div align="center">
 <h1>UniDAC: Universal Metric Depth Estimation for Any Camera</h1>
 
-[**Girish Chandar Ganesan**](https://girish1511.github.io/)<sup>1</sup> . [**Yuliang Guo**](https://yuliangguo.github.io/)<sup>2</sup> · [**Liu Ren**](https://www.liu-ren.com/)<sup>2</sup> . [**Xiaoming Liu**](https://scholar.google.com/citations?hl=en&user=Bii0w1oAAAAJ)<sup>1</sup>
+[**Girish Chandar Ganesan**](https://girish1511.github.io/)<sup>1</sup> . [**Yuliang Guo**](https://yuliangguo.github.io/)<sup>2</sup> · [**Liu Ren**](https://www.liu-ren.com/)<sup>2</sup> . [**Xiaoming Liu**](https://cs.unc.edu/person/xiaoming-liu/)<sup>1,3</sup>
 
-<sup>1</sup>Michigan State University&emsp;&emsp;&emsp;&emsp;<sup>2</sup>Bosch Research North America
+<sup>1</sup>Michigan State University&emsp;&emsp;&emsp;<sup>2</sup>Bosch Research North America&emsp;&emsp;&emsp;<sup>3</sup>University of North Carolina at Chapel Hill
 
 
 <a href=''><img src='https://img.shields.io/badge/arXiv-UniDAC-red' alt='Paper PDF'></a>
