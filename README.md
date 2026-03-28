@@ -22,13 +22,13 @@
 
 ## News
 
-- ``2026-03-21``: Demo code for easy setup and usage.
-- ``2026-03-13``: Release of pre-trained UniDAC models trained on moderately sized datasets.
-- ``2026-03-13``: Testing and evaluation pipeline for zero-shot metric depth estimation on perspective, fisheye, and 360-degree datasets.
-- ``2026-03-13``: Complete UniDAC training pipeline using mixed perspective camera data.
-- ``2026-03-13``: Complete data preparation and curation scripts.
-- ``2026-02-20``: UniDAC accepted by CVPR 2026!
-<!-- - [TBD] Foundation-level model trained on a large-scale, diverse dataset mixture, encompassing perspective, fisheye, and 360-degree camera data. -->
+
+- [ ] Training code for UniDAC.
+- [ ] Demo code for easy setup and usage.
+- [x] `2026-03-13`: Release of UniDAC checkpoint trained on moderately sized datasets.
+- [x] `2026-03-13`: Testing and evaluation pipeline for zero-shot metric depth estimation on perspective, fisheye, and 360-degree datasets.
+- [x] `2026-03-13`: Data preparation and curation scripts.
+- [x] `2026-02-20`: UniDAC accepted by CVPR 2026!
 
 ## Pipeline
 
@@ -132,12 +132,6 @@ The training set consist of 4 outdoor datasets and 3 indoor datasets. The testin
 
 Please refer to [DATA.md](docs/DATA.md) for detailed datasets preparation.
 
-<!-- Our current training set is very slim compared to prior fundation models. Currently, DAC is trained on a combination set of 3 labeled datasets (670k images) for indoor model and a combination of 2 datasets (130k) for outdoor model. Two 360 datasets and two fisheye datasets are used for zero-shot testing.
-
-![data](docs/table_data_coverage.png)
-
-Please refer to [DATA.md](docs/DATA.md) for detailed datasets preparation. Make sure the relative paths of datasets have been set correctly before proceeding to the actual testing and training sections. -->
-
 ## Testing
 
 Download the checkpoint from <a href='https://huggingface.co/girish1511/UniDAC'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-yellow'></a> and place in `checkpoints/`.
@@ -154,30 +148,6 @@ Different config files for evaluating the reported testing datasets are included
 | :---------: | :---------: | :----------: | :-------------: | :--------: | :-------: | :------: | :--------: | :------: |
 |  `<domain>` |   `indoor`  |   `indoor`   |     `indoor`    |  `outdoor` | `outdoor` | `indoor` |  `outdoor` | `indoor` |
 | `<dataset>` | `scannetpp` |     `gv2`    |   `scannetpp`   | `kitti360` |  `kitti`  |   `nyu`  | `nuscenes` |  `ibims` |
-
-
-<!-- Given provided pretrained models saved in `checkpoints/`, the following code can be run to test and evaluate on certain dataset, e.g., ScanNet++:
-
-```bash
-python script/test_dac.py --model-file checkpoints/dac_swinl_indoor.pt --model-name IDiscERP --config-file configs/test/dac_swinl_indoor_test_scannetpp.json --base-path datasets --vis
-```
-
-Different config files for testing all the reported datasets are included in [configs/test](configs/test). Interested users could also refer to the provided [lauch.json](.vscode/launch.json) for convinient use or debug provided testing scripts in VSCode. The following tables lay out those most relative ones.
-
-| Testing dataset | Testing script | --model-file | --config-file | --model-name |
-|:-|:-|:-|:-|:-:|
-| Matterport | scripts/test_dac.py           | checkpoints/dac-indoor-resnet101.pt          | [relative path](configs/test/dac_resnet101_indoor_test_m3d.json)       | IDiscERP |
-| Gibson-V2 | ^                              | ^                                            | [relative path](configs/test/dac_resnet101_indoor_test_gv2.json)       | IDiscERP |
-| ScanNet++ | ^                              | ^                                            | [relative path](configs/test/dac_resnet101_indoor_test_scannetpp.json) | IDiscERP |
-| NYU     | ^                                | ^                                            | [relative path](configs/test/dac_resnet101_indoor_test_nyu.json)       | IDiscERP |
-| KITTI360 | ^                               | checkpoints/dac-outdoor-resnet101.pt         | [relative path](configs/test/dac_resnet101_indoor_test_kitti360.json)  | IDisc    |
-| KITTI   | ^                                | ^                                            | [relative path](configs/test/dac_resnet101_indoor_test_kitti.json)     | IDisc    |
-| ...     | scripts/test_persp.py            | checkpoints/idisc-...                        | ...                                                                    | IDisc    |
-| ...     | ^                                | checkpoints/cnndepth-...                     | ...                                                                    | CNNDepth |
-
-**Note**: *IDiscERP* is our modified version of the *IDisc* model, incorporating isolated image and positional encoding features. It has been observed to improve results in small-size data training, particularly for better depth-scale equivariance. However, these modifications are not essential for large dataset training. *CNNDepth* refers to the CNN portion of the *IDisc* model, which serves as a network baseline but consistently underperforms compared to other models.
-
-The ResNet101 models and configuration files can be replaced with the corresponding Swin-L versions. Ensure that the `--model-name` parameter matches the type of trained model. For users interested in comparing our DAC framework with the **Metric3D** training framework, we have provided pre-trained weak baselines along with their testing scripts, as detailed in the last two rows of the table. -->
 
 
 
