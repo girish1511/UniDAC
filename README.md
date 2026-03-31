@@ -7,7 +7,7 @@
 <sup>1</sup>Michigan State University&emsp;&emsp;&emsp;<sup>2</sup>Bosch Research North America&emsp;&emsp;&emsp;<sup>3</sup>University of North Carolina at Chapel Hill
 
 
-<a href=''><img src='https://img.shields.io/badge/arXiv-UniDAC-red' alt='Paper PDF'></a>
+<a href='https://arxiv.org/abs/2603.27105'><img src='https://img.shields.io/badge/arXiv-UniDAC-red' alt='Paper PDF'></a>
 <a href='https://girish1511.github.io/UniDAC/'><img src='https://img.shields.io/badge/Project_Page-UniDAC-green' alt='Project Page'></a>
 <a href='https://huggingface.co/girish1511/UniDAC'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-yellow'></a>
 
