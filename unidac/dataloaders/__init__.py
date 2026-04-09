@@ -1,6 +1,7 @@
 from .dataset import BaseDataset
 from .ddad_erp_online import DDADERPOnlineDataset
 from .lyft_erp_online import LYFTERPOnlineDataset
+from .kitti_erp import KITTIERPDataset
 from .kitti360_erp import KITTI360ERPDataset
 # from .nyu import NYUDataset
 # from .nyu_erp import NYUERPDataset
