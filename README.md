@@ -24,7 +24,8 @@
 
 
 - [ ] Training code for UniDAC.
-- [ ] Demo code for easy setup and usage.
+- [ ] Demo code for images with unknown camera parameters.
+- [x] Demo code for easy setup and usage.
 - [x] `2026-03-13`: Release of UniDAC checkpoint trained on moderately sized datasets.
 - [x] `2026-03-13`: Testing and evaluation pipeline for zero-shot metric depth estimation on perspective, fisheye, and 360-degree datasets.
 - [x] `2026-03-13`: Data preparation and curation scripts.
@@ -131,6 +132,17 @@ export PYTHONPATH="$PWD:$PYTHONPATH"
 The training set consist of 4 outdoor datasets and 3 indoor datasets. The testing set consists of two 360 datasets, two fisheye datasets and 4 perspective datasets.
 
 Please refer to [DATA.md](docs/DATA.md) for detailed datasets preparation.
+
+## Demo
+
+We provide a simple ready-to-run demo script in the `demo` folder along with the required sample inputs in `demo/input`.
+`demo/demo_unidac.py` demonstrates the inference pipeline for diverse camera types and scenes, including ScanNet++(Indoor, Fisheye), Matterport3D(Indoor, 360) and KITTI360(Outdoor, Fisheye), using a unified model trained only on perspective images.
+
+Download the checkpoint from <a href='https://huggingface.co/girish1511/UniDAC'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-yellow'></a> and place in `checkpoints/`.
+You can then run the demo script by running the following command and the visualizations will be stored in `demo/output`:
+```
+bash demo.sh
+```
 
 ## Testing
 
