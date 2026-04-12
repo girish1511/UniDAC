@@ -1,0 +1,13 @@
+{
+    "dataset_name": "matterport3d",
+    "image_filename": "demo/input/matterport3d_rgb.png",
+    "annotation_filename_depth": "demo/input/matterport3d_depth.exr",
+    "depth_scale": 1.0,
+    "fishey_grid": null,
+    "fwd_sz": [512, 1024],
+    "erp": true,
+    "cam_params": {
+        "dataset": "matterport3d",
+        "camera_model": "ERP"
+    }
+}

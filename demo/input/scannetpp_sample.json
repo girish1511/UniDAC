@@ -1,0 +1,22 @@
+{
+    "dataset_name": "scannetpp",
+    "image_filename": "demo/input/scannetpp_rgb.jpg",
+    "annotation_filename_depth": "demo/input/scannetpp_depth.png",
+    "depth_scale": 1000.0,
+    "fishey_grid": "demo/input/scannetpp_grid_fisheye.npy",
+    "crop_wFoV": 180,
+    "fwd_sz": [500, 750],
+    "erp": false,
+    "cam_params": {
+        "dataset": "scannetpp",
+        "fl_x": 789.9080967683176,
+        "fl_y": 791.5566599926353,
+        "cx": 879.203786509326,
+        "cy": 584.7893145555763,
+        "k1": -0.029473047856246333,
+        "k2": -0.005769803970428537,
+        "k3": -0.002148236771485755,
+        "k4": 0.00014840568362061509,
+        "camera_model": "OPENCV_FISHEYE"
+    }
+}

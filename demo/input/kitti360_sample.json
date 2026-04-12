@@ -1,0 +1,23 @@
+{
+    "dataset_name": "kitti360",
+    "image_filename": "demo/input/kitti360_rgb.png",
+    "annotation_filename_depth": "demo/input/kitti360_depth.png",
+    "depth_scale": 256.0,
+    "fishey_grid": "splits/kitti360/grid_fisheye_02.npy",
+    "crop_wFoV": 180,
+    "fwd_sz": [700, 700],
+    "erp": false,
+    "cam_params": {
+        "dataset": "kitti360",
+        "fx": 1.3363220825849971e+03,
+        "fy": 1.3357883350012958e+03,
+        "cx": 7.1694323510126321e+02,
+        "cy": 7.0576498308221585e+02,
+        "xi": 2.2134047507854890e+00,
+        "k1": 1.6798235660113681e-02,
+        "k2": 1.6548773243373522e+00,
+        "p1": 4.2223943394772046e-04,
+        "p2": 4.2462134260997584e-04,
+        "camera_model": "MEI"
+    }
+}
