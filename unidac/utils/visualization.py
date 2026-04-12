@@ -277,29 +277,37 @@ def save_val_imgs_v2(
         plt.savefig(os.path.join(save_dir, filename[:-4]+'_pred.jpg'), dpi=200, bbox_inches='tight', pad_inches=0)
         plt.close('all')
     else:
-        plt.figure()
+        im_ratio = rgb.shape[0]/rgb.shape[1]
+        print(rgb.shape)
+        plt.figure(dpi=300)
         plt.subplot(2, 2, 1)
         plt.imshow(rgb)
+        cb = plt.colorbar(fraction=0.03*im_ratio)
+        cb.ax.set_visible(False)
         plt.title("Image")
+        plt.axis('off')
         
         plt.subplot(2, 2, 2)
-        ax=plt.imshow(depth_arel, cmap=cmap_arel, norm=norm_arel)
-        plt.colorbar(ax, label="A.Rel")
+        plt.imshow(depth_arel, cmap=cmap_arel, norm=norm_arel)
+        plt.colorbar(fraction=0.03*im_ratio, label="A.Rel")
         plt.title("A. Rel")
+        plt.axis('off')
         
         plt.subplot(2, 2, 3)
-        ax = plt.imshow(depth_gt, cmap=cmap_depth, norm=norm_depth)
-        plt.colorbar(ax, label="Meter")
+        plt.imshow(depth_gt, cmap=cmap_depth, norm=norm_depth)
+        plt.colorbar(fraction=0.03*im_ratio, label="Meter")
         plt.title("Depth GT")
+        plt.axis('off')
         
         plt.subplot(2, 2, 4)
-        ax = plt.imshow(depth_pred, cmap=cmap_depth, norm=norm_depth)
-        plt.colorbar(ax, label="Meter")
+        plt.imshow(depth_pred, cmap=cmap_depth, norm=norm_depth)
+        plt.colorbar(fraction=0.03*im_ratio, label="Meter")
         plt.title("Depth Pred")
+        plt.axis('off')
         
         plt.subplots_adjust(hspace=0.4)
-        plt.savefig(os.path.join(save_dir, filename[:-4]+'_subplot.jpg'), dpi=200)
-        # plt.close()
+        plt.savefig(os.path.join(save_dir, filename[:-4]+'_subplot.jpg'), bbox_inches='tight')
+        
     return rgb
 
 def save_val_imgs_v3(
