@@ -197,12 +197,11 @@ This software is released under MIT license. You can view a license summary [her
 
 If you find our work useful in your research please consider citing our publication:
 ```bibtex
-@inproceedings{Ganesan2026UniDAC,
-  author    = {Girish Chandar Ganesan and Yuliang Guo and Liu Ren and Xiaoming Liu},
-  title     = {UniDAC: Universal Metric Depth Estimation for Any Camera},
-  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-  address   = {Denver, CO},
-  month     = {June},
-  year      = {2026}
+@inproceedings{ganesan2026unidac,
+  title={UniDAC: Universal Metric Depth Estimation for Any Camera},
+  author={Ganesan, Girish Chandar and Guo, Yuliang and Ren, Liu and Liu, Xiaoming},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={26953--26963},
+  year={2026}
 }
 ```
